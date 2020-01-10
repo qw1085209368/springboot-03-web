@@ -1,0 +1,96 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html class="no-js h-100" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Tables</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="styles/shards-dashboards.1.1.0.min.css">
+    <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
+  <body class="h-100">
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Main Sidebar -->
+        <div th:replace="~{/commons::sidebar(active='tables.html')}"></div>
+        <!-- End Main Sidebar -->
+
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+          <div th:replace="~{/commons::main-navbar}"></div>
+          <!-- / .main-navbar -->
+          <div class="main-content-container container-fluid px-4">
+            <!-- Page Header -->
+            <div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Overview</span>
+                <h3 class="page-title">Data Tables</h3>
+              </div>
+            </div>
+            <!-- End Page Header -->
+            <!-- Default Light Table -->
+            <div class="row">
+              <div class="col">
+                <div class="card card-small mb-4">
+                  <div class="card-header border-bottom">
+                    <h6 class="m-0"><a class="btn btn-sm btn-success" th:href="@{/emp/table}">添加员工</a></h6>
+                  </div>
+                  <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                      <thead class="bg-light">
+                        <tr>
+
+                          <th scope="col" class="border-0">编号</th>
+                          <th scope="col" class="border-0">姓名</th>
+                          <th scope="col" class="border-0">邮箱</th>
+                          <th scope="col" class="border-0">性别</th>
+                          <th scope="col" class="border-0">部门</th>
+                          <th scope="col" class="border-0">生日</th>
+                          <th scope="col" class="border-0">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="emp:${emps}">
+                          <td th:text="${emp.getId()}"></td>
+                          <td th:text="${emp.getLastname()}"></td>
+                          <td th:text="${emp.getEmail()}"></td>
+                          <td th:text="${emp.getGender()==0?'女':'男'}"></td>
+                          <td th:text="${emp.getDepartment().getDepartmentName()}"></td>
+                          <td th:text="${#dates.format(emp.getBirth(),'yyyy-mm-dd')}"></td>
+                          <td>
+                            <a class="btn btn-sm btn-success" th:href="@{/emp/}+${emp.getId()}">编辑</a>
+                            <a class="btn btn-sm btn-danger" th:href="@{/delemp/}+${emp.getId()}">删除</a>
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Default Light Table -->
+
+          </div>
+
+        </main>
+      </div>
+    </div>
+
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="scripts/popper.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/Chart.min.js"></script>
+    <script src="scripts/shards.min.js"></script>
+    <script src="scripts/jquery.sharrre.min.js"></script>
+    <script src="scripts/extras.1.1.0.min.js"></script>
+    <script src="scripts/shards-dashboards.1.1.0.min.js"></script>
+  </body>
+</html>
